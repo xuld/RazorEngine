@@ -311,6 +311,8 @@ namespace Xuld.RazorEngine {
 
         }
 
+        static Razor _razor;
+        
         /// <summary>
         /// 提供快速解析 Razor 模板的辅助方法。
         /// </summary>
@@ -318,7 +320,11 @@ namespace Xuld.RazorEngine {
         /// <param name="model">解析时使用的模型对象。</param>
         /// <returns>解析后返回的字符串。</returns>
         public static string Parse(string template, object model = null) {
-            return new Razor().ParseString(template, model);
+            if (_razor == null) {
+                _razor = new Razor();
+            }
+
+            return _razor.ParseString(template, model);
         }
 
         /// <summary>

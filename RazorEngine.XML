@@ -1,0 +1,622 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>RazorEngine</name>
+    </assembly>
+    <members>
+        <member name="T:Xuld.RazorEngine.HtmlHelper">
+            <summary>
+            为在网页中呈现 HTML 窗体控件和执行窗体验证提供支持。
+            </summary>
+        </member>
+        <member name="M:Xuld.RazorEngine.HtmlHelper.AttributeEncode(System.Object)">
+            <summary>通过使用最小编码，返回表示指定对象的 HTML 编码的字符串，该最小编码仅适用于由引号引起来的 HTML 特性。</summary>
+            <returns>表示该对象的 HTML 编码的字符串。</returns>
+            <param name="value">要编码的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.HtmlHelper.AttributeEncode(System.String)">
+            <summary>通过使用最小编码，返回表示指定字符串的 HTML 编码的字符串，该最小编码仅适用于由引号引起来的 HTML 特性。</summary>
+            <returns>表示原始字符串的 HTML 编码的字符串。</returns>
+            <param name="value">要编码的字符串。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.HtmlHelper.Encode(System.Object)">
+            <summary>通过使用适用于任意 HTML 的完整编码返回一个表示指定对象的 HTML 编码的字符串。</summary>
+            <returns>表示该对象的 HTML 编码的字符串。</returns>
+            <param name="value">要编码的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.HtmlHelper.Encode(System.String)">
+            <summary>通过使用适用于任意 HTML 的完整编码返回一个表示指定字符串的 HTML 编码的字符串。</summary>
+            <returns>表示原始字符串的 HTML 编码的字符串。</returns>
+            <param name="value">要编码的字符串。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.HtmlHelper.Raw(System.Object)">
+            <summary>包装 <see cref="T:System.Web.HtmlString" /> 实例中的 HTML 标记，以便将其解释为 HTML 标记。</summary>
+            <returns>未编码的 HTML。</returns>
+            <param name="value">要呈现其 HTML 的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.HtmlHelper.Raw(System.String)">
+            <summary>包装 <see cref="T:System.Web.HtmlString" /> 实例中的 HTML 标记，以便将其解释为 HTML 标记。</summary>
+            <returns>未编码的 HTML。</returns>
+            <param name="value">要解释为 HTML 标记而不是进行 HTML 编码的字符串。</param>
+        </member>
+        <member name="T:Xuld.RazorEngine.Razor">
+            <summary>
+            表示一个 Razor 模板解析器。
+            </summary>
+        </member>
+        <member name="F:Xuld.RazorEngine.Razor._templateTypeCache">
+            <summary>
+            存储已编译的模板类型。
+            </summary>
+            <remarks>
+            sourceFileName => [TemplateType, Model]
+            </remarks>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.#ctor">
+            <summary>
+            初始化 <see cref="T:Xuld.RazorEngine.Razor"/> 对象的新实例。
+            </summary>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.GenerateCode(System.IO.TextReader,System.String,System.String,System.String,System.String,System.Type)">
+            <summary>
+            创建指定路径的模板解析后的模板类型。
+            </summary>
+            <param name="sourceFileName">模板的文件名或模板的别名，用于在模板互相引用时使用。模板的名字作为模板的唯一标识符，应该保证其唯一性。默认为模板文件的路径或模板字符串本身的哈希值。</param>
+            <param name="templateReader">用于获取模板内容的 <see cref="T:System.IO.TextReader"/> 对象。</param>
+            <param name="className">模板编译后的类名。默认为根据 <paramref name="sourceFileName"/> 动态生成。</param>
+            <param name="rootNamespace">模板编译后的名字空间。默认为 RazorCompiledTemplates 。</param>
+            <param name="baseClassName">模板编译后的默认基类。如果值为 null，则使用 <see cref="T:Xuld.RazorEngine.TemplateBase`1"/> 作为模板基类。在模板中可以通过 @inherits 关键字来覆盖这里的设置。</param>
+            <param name="modelType">模板编译后的模型类型。如果值为 null，则表示不使用模板对象。未来版本中，在模板中可以通过 @model 关键字来覆盖这里的设置。</param>
+            <returns>一个 <see cref="T:System.Web.Razor.GeneratorResults"/> 对象。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.AddTemplateType(System.IO.TextReader,System.String,System.String,System.String,System.String,System.Type)">
+            <summary>
+            创建指定路径的模板解析后的模板类型。
+            </summary>
+            <param name="templateReader">用于获取模板内容的 <see cref="T:System.IO.TextReader"/> 对象。</param>
+            <param name="className">模板编译后的类名。默认为根据 <paramref name="sourceFileName"/> 动态生成。</param>
+            <param name="rootNamespace">模板编译后的名字空间。默认为 RazorCompiledTemplates 。</param>
+            <param name="sourceFileName">模板的文件名或模板的别名，用于在模板互相引用时使用。模板的名字作为模板的唯一标识符，应该保证其唯一性。默认为模板文件的路径或模板字符串本身的哈希值。</param>
+            <param name="baseClassName">模板编译后的默认基类。如果值为 null，则使用 <see cref="T:Xuld.RazorEngine.TemplateBase`1"/> 作为模板基类。在模板中可以通过 @inherits 关键字来覆盖这里的设置。</param>
+            <param name="modelType">模板编译后的模型类型。如果值为 null，则表示不使用模板对象。未来版本中，在模板中可以通过 @model 关键字来覆盖这里的设置。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.AddTemplateType(System.IO.TextReader,System.String,System.Type)">
+            <summary>
+            创建指定路径的模板解析后的模板类型。
+            </summary>
+            <param name="templateReader">用于获取模板内容的 <see cref="T:System.IO.TextReader"/> 对象。</param>
+            <param name="sourceFileName">模板的文件名或模板的别名，用于在模板互相引用时使用。模板的名字作为模板的唯一标识符，应该保证其唯一性。默认为模板文件的路径或模板字符串本身的哈希值。</param>
+            <param name="modelType">模板编译后的模型类型。如果值为 null，则表示不使用模板对象。未来版本中，在模板中可以通过 @model 关键字来覆盖这里的设置。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.RemoveTemplateType(System.String)">
+            <summary>
+            移除一个模板类型。
+            </summary>
+            <param name="sourceFileName">模板的文件名或模板的别名，用于在模板互相引用时使用。模板的名字作为模板的唯一标识符，应该保证其唯一性。默认为模板文件的路径或模板字符串本身的哈希值。</param>
+            <returns>如果成功找到并移除该元素，则为 true；否则为 false。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.ClearTemplateTypes">
+            <summary>
+            清空已缓存的模板类型列表。
+            </summary>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.GetTemplateType(System.IO.TextReader,System.String,System.Type)">
+            <summary>
+            获取或创建指定路径的模板解析后的模板类型。
+            </summary>
+            <param name="templateReader">用于获取模板内容的 <see cref="T:System.IO.TextReader"/> 对象。</param>
+            <param name="sourceFileName">模板的文件名或模板的别名，用于在模板互相引用时使用。模板的名字作为模板的唯一标识符，应该保证其唯一性。默认为模板文件的路径或模板字符串本身的哈希值。</param>
+            <param name="modelType">模板编译后的模型类型。如果值为 null，则表示不使用模板对象。未来版本中，在模板中可以通过 @model 关键字来覆盖这里的设置。</param>
+            <returns>指定路径的模板解析后的模板类型。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.CreateTemplate(Xuld.RazorEngine.TemplateContext)">
+            <summary>
+            创建指定的模板对象。
+            </summary>
+            <param name="context">解析执行使用的上下文。</param>
+            <returns>返回模板对象实例。大部分情况是一个 <see cref="T:Xuld.RazorEngine.ITemplateBase"/> 实例。调用其 Execute 方法可执行模板生成操作。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.Parse(Xuld.RazorEngine.TemplateContext)">
+            <summary>
+            编译指定的模板类，并使用指定的模型和上下文执行模板。
+            </summary>
+            <param name="context">解析执行使用的上下文。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.Parse(System.String,System.Object)">
+            <summary>
+            提供快速解析 Razor 模板的辅助方法。
+            </summary>
+            <param name="template">模板内容。</param>
+            <param name="model">解析时使用的模型对象。</param>
+            <returns>解析后返回的字符串。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.ParseString(System.String,System.Object,System.String)">
+            <summary>
+            解析指定的模板内容。
+            </summary>
+            <param name="template">模板内容。</param>
+            <param name="model">解析时使用的模型对象。</param>
+            <param name="sourceFileName">模板的文件名或模板的别名，用于在模板互相引用时使用。模板的名字作为模板的唯一标识符，应该保证其唯一性。默认为模板文件的路径或模板字符串本身的哈希值。</param>
+            <returns>解析后返回的字符串。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.ParseString(System.String,System.Object)">
+            <summary>
+            解析指定的模板内容。
+            </summary>
+            <param name="template">模板内容。</param>
+            <param name="model">解析时使用的模型对象。</param>
+            <returns>解析后返回的字符串。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.ParseFile(System.String,System.Text.Encoding,System.Object,System.IO.TextWriter)">
+            <summary>
+            解析指定的模板文件。使用 UTF-8 编码读写文件。
+            </summary>
+            <param name="templateFileName">模板文件路径。</param>
+            <param name="model">解析时使用的模型对象。</param>
+            <returns>返回解析后的内容。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.ParseFile(System.String,System.Text.Encoding,System.Object,System.String,System.Text.Encoding)">
+            <summary>
+            解析指定的模板文件。
+            </summary>
+            <param name="templateFileName">模板文件路径。</param>
+            <param name="encoding">模板文件的编码。</param>
+            <param name="model">解析时使用的模型对象。</param>
+            <param name="saveFilePath">解析后保存的路径。</param>
+            <param name="saveEncoding">保存的路径。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.ParseFile(System.String,System.Object,System.String)">
+            <summary>
+            解析指定的模板文件。使用 UTF-8 编码读写文件。
+            </summary>
+            <param name="templateFileName">模板文件路径。</param>
+            <param name="model">解析时使用的模型对象。</param>
+            <param name="saveFilePath">解析后保存的路径。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.ParseFile(System.String,System.Text.Encoding,System.Object)">
+            <summary>
+            解析指定的模板文件。
+            </summary>
+            <param name="templateFileName">模板文件路径。</param>
+            <param name="encoding">模板文件的编码。</param>
+            <param name="model">解析时使用的模型对象。</param>
+            <returns>返回解析后的内容。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.ParseFile(System.String,System.Object)">
+            <summary>
+            解析指定的模板文件。使用 UTF-8 编码读写文件。
+            </summary>
+            <param name="templateFileName">模板文件路径。</param>
+            <param name="model">解析时使用的模型对象。</param>
+            <returns>返回解析后的内容。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.Razor.Dispose">
+            <summary>
+            执行与释放或重置非托管资源相关的应用程序定义的任务。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.Razor.RazorTemplateEngine">
+            <summary>
+            获取或设置内部用于解析 Razor 模板的 RazorTemplateEngine 的对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.Razor.CodeDomProvider">
+            <summary>
+            获取或设置内部用于编译代码的 CodeDomProvider 对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.Razor.CompilerParameters">
+            <summary>
+            获取或设置编译 Razor 文件使用的参数。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.Razor.ReferencedAssemblies">
+            <summary>
+            获取当前项目所引用的程序集。
+            </summary>
+            <value>一个集合，包含由源引用以进行编译的程序集名称。</value>
+        </member>
+        <member name="P:Xuld.RazorEngine.Razor.NamespaceImports">
+            <summary>
+            获取当前默认使用的全局名字空间列表。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.Razor.DefaultBaseClassName">
+            <summary>
+            获取或设置编译的模板基类。为了确保它可以正常工作，它应该实现 <see cref="T:Xuld.RazorEngine.ITemplateBase"/> 接口。
+            </summary>
+        </member>
+        <member name="T:Xuld.RazorEngine.TemplateBase`1">
+            <summary>
+            编译后的模板的默认基类。
+            </summary>
+            <typeparam name="T">Model 属性的类型。</typeparam>
+        </member>
+        <member name="T:Xuld.RazorEngine.ITemplateBase">
+            <summary>
+            表示默认的模板对象应该实现的接口。
+            </summary>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.Execute">
+            <summary>
+            执行当前的模板。
+            </summary>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.Execute(Xuld.RazorEngine.TemplateContext)">
+            <summary>
+            在指定的作用域内执行当前的模板。
+            </summary>
+            <param name="context">执行时使用的作用域。</param>
+            <param name="model">执行使用的模型对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.Write(System.Object)">
+            <summary>将指定的对象作为 HTML 编码的字符串写入。</summary>
+            <param name="value">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.Write(System.Action{System.IO.TextWriter})">
+            <summary>将指定的对象作为 HTML 编码的字符串写入。</summary>
+            <param name="value">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.Write(Xuld.RazorEngine.HtmlString)">
+            <summary>将指定的对象作为 HTML 编码的字符串写入。</summary>
+            <param name="value">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.Write(System.String)">
+            <summary>将指定的对象作为 HTML 编码的字符串写入。</summary>
+            <param name="value">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.WriteLiteral(System.Object)">
+            <summary>无需先对指定的对象进行 HTML 编码，即可将其写入。</summary>
+            <param name="value">要写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.WriteLiteral(System.String)">
+            <summary>无需先对指定的对象进行 HTML 编码，即可将其写入。</summary>
+            <param name="value">要写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.WriteAttribute(System.String,System.Tuple{System.String,System.Int32},System.Tuple{System.String,System.Int32},Xuld.RazorEngine.AttributeValue[])">
+            <summary>将指定的对象作为 HTML 属性写入指定的文本编写器。</summary>
+            <param name="value">要写入的属性名。</param>
+            <param name="value">要写入的属性值。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.DefineSection(System.String,Xuld.RazorEngine.SectionWriter)">
+            <summary>由内容页调用以创建指定的内容部分。</summary>
+            <param name="name">要创建的部分的名称。</param>
+            <param name="action">在新部分中要执行的操作的类型。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.RenderSection(System.String,System.Boolean)">
+            <summary>在布局页中，将呈现指定部分的内容并指定该部分是否为必需。</summary>
+            <returns>要呈现的 HTML 内容。</returns>
+            <param name="name">要呈现的部分。</param>
+            <param name="required">要指定该部分为必需，则为 true；否则为 false。</param>
+            <exception cref="T:System.Web.HttpException">
+            <paramref name="name" /> 部分已呈现。- 或 -<paramref name="name" /> 部分已标记为必需，但却找不到。</exception>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.NormalizePath(System.String)">
+            <summary>从指定的路径返回规范化路径。</summary>
+            <returns>规范化路径。</returns>
+            <param name="path">要规范化的路径。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.Href(System.String,System.Object[])">
+            <summary>使用指定的参数，从应用程序相对 URL 构建绝对 URL。</summary>
+            <returns>绝对 URL。</returns>
+            <param name="path">要在 URL 中使用的初始路径。</param>
+            <param name="pathParts">附加路径信息，例如文件夹和子文件夹。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.RenderPage(System.String)">
+            <summary>呈现内容页。</summary>
+            <returns>一个可以写入页的输出的对象。</returns>
+            <param name="path">要呈现的页的路径。</param>
+            <param name="model">要传递给页的数据。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.RenderPage(System.String,System.Object)">
+            <summary>呈现内容页。</summary>
+            <returns>一个可以写入页的输出的对象。</returns>
+            <param name="path">要呈现的页的路径。</param>
+            <param name="model">要传递给页的数据。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.ITemplateBase.ResolveUrl(System.String)">
+            <summary>
+            将一个相对的路径地址改成基于网站虚拟路径的绝对地址。
+            </summary>
+            <param name="relativeUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Xuld.RazorEngine.ITemplateBase.Model">
+            <summary>
+            获取或设置当前模板的模型对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.ITemplateBase.ViewBag">
+            <summary>
+            获取当前的自定义存储对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.ITemplateBase.Output">
+            <summary>获取页面当前的 <see cref="T:System.IO.TextWriter" /> 对象。</summary>
+            <returns>
+            <see cref="T:System.IO.TextWriter" /> 对象。</returns>
+        </member>
+        <member name="P:Xuld.RazorEngine.ITemplateBase.Html">
+            <summary>获取与页关联的 <see cref="T:System.Web.WebPages.Html.HtmlHelper" /> 对象。</summary>
+            <returns>可以在页面中呈现 HTML 窗体控件的对象。</returns>
+        </member>
+        <member name="P:Xuld.RazorEngine.ITemplateBase.VirtualPath">
+            <summary>获取页的虚拟路径。</summary>
+            <returns>虚拟路径。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.Init(System.Object)">
+            <summary>
+            在执行之前执行初始化操作。
+            </summary>
+            <param name="model">要初始化的模型对象。</param>
+            <returns>返回初始化后的模型对象。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.Execute">
+            <summary>
+            执行当前的模板。
+            </summary>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.Execute(Xuld.RazorEngine.TemplateContext)">
+            <summary>
+            在指定的作用域内执行当前的模板。
+            </summary>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.Write(System.Object)">
+            <summary>将指定的对象作为 HTML 编码的字符串写入。</summary>
+            <param name="value">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.Write(System.Action{System.IO.TextWriter})">
+            <summary>将指定的对象作为 HTML 编码的字符串写入。</summary>
+            <param name="value">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.Write(Xuld.RazorEngine.HtmlString)">
+            <summary>将指定的对象作为 HTML 编码的字符串写入。</summary>
+            <param name="value">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.Write(System.String)">
+            <summary>将指定的对象作为 HTML 编码的字符串写入。</summary>
+            <param name="value">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.WriteLiteral(System.Object)">
+            <summary>无需先对指定的对象进行 HTML 编码，即可将其写入。</summary>
+            <param name="value">要写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.WriteLiteral(System.String)">
+            <summary>无需先对指定的对象进行 HTML 编码，即可将其写入。</summary>
+            <param name="value">要写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.WriteTo(System.IO.TextWriter,System.Object)">
+            <summary>将指定的对象作为 HTML 编码的字符串写入指定的文本编写器。</summary>
+            <param name="writer">文本编写器。</param>
+            <param name="content">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.WriteTo(System.IO.TextWriter,System.Action{System.IO.TextWriter})">
+            <summary>将指定的对象作为 HTML 编码的字符串写入指定的文本编写器。</summary>
+            <param name="writer">文本编写器。</param>
+            <param name="content">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.WriteTo(System.IO.TextWriter,System.String)">
+            <summary>将指定的对象作为 HTML 编码的字符串写入指定的文本编写器。</summary>
+            <param name="writer">文本编写器。</param>
+            <param name="content">要编码并写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.WriteLiteralTo(System.IO.TextWriter,System.Object)">
+            <summary>无需 HTML 编码即可将指定的对象写入指定的 <see cref="T:System.IO.TextWriter" /> 实例。</summary>
+            <param name="writer">文本编写器。</param>
+            <param name="content">要写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.WriteLiteralTo(System.IO.TextWriter,System.String)">
+            <summary>无需 HTML 编码即可将指定的对象写入指定的 <see cref="T:System.IO.TextWriter" /> 实例。</summary>
+            <param name="writer">文本编写器。</param>
+            <param name="content">要写入的对象。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.WriteAttribute(System.String,System.Tuple{System.String,System.Int32},System.Tuple{System.String,System.Int32},Xuld.RazorEngine.AttributeValue[])">
+            <summary>将指定的对象作为 HTML 属性写入指定的文本编写器。</summary>
+            <param name="value">要写入的属性名。</param>
+            <param name="value">要写入的属性值。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.WriteAttributeTo(System.IO.TextWriter,System.String,System.Tuple{System.String,System.Int32},System.Tuple{System.String,System.Int32},Xuld.RazorEngine.AttributeValue[])">
+            <summary>
+            将指定的对象作为 HTML 属性写入指定的写入指定的 <see cref="T:System.IO.TextWriter" /> 实例。
+            </summary>
+            <param name="writer">文本编写器。</param>
+            <param name="value">要写入的属性名。</param>
+            <param name="value">要写入的属性值。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.DefineSection(System.String,Xuld.RazorEngine.SectionWriter)">
+            <summary>由内容页调用以创建指定的内容部分。</summary>
+            <param name="name">要创建的部分的名称。</param>
+            <param name="action">在新部分中要执行的操作的类型。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.RenderSection(System.String,System.Boolean)">
+            <summary>在布局页中，将呈现指定部分的内容并指定该部分是否为必需。</summary>
+            <returns>要呈现的 HTML 内容。</returns>
+            <param name="name">要呈现的部分。</param>
+            <param name="required">要指定该部分为必需，则为 true；否则为 false。</param>
+            <exception cref="T:System.Web.HttpException">
+            <paramref name="name" /> 部分已呈现。- 或 -<paramref name="name" /> 部分已标记为必需，但却找不到。</exception>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.NormalizePath(System.String)">
+            <summary>从指定的路径返回规范化路径。</summary>
+            <returns>规范化路径。</returns>
+            <param name="path">要规范化的路径。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.Href(System.String,System.Object[])">
+            <summary>使用指定的参数，从应用程序相对 URL 构建绝对 URL。</summary>
+            <returns>绝对 URL。</returns>
+            <param name="path">要在 URL 中使用的初始路径。</param>
+            <param name="pathParts">附加路径信息，例如文件夹和子文件夹。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.RenderPage(System.String)">
+            <summary>呈现内容页。</summary>
+            <returns>一个可以写入页的输出的对象。</returns>
+            <param name="path">要呈现的页的路径。</param>
+            <param name="model">要传递给页的数据。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.RenderPage(System.String,System.Object)">
+            <summary>呈现内容页。</summary>
+            <returns>一个可以写入页的输出的对象。</returns>
+            <param name="path">要呈现的页的路径。</param>
+            <param name="model">要传递给页的数据。</param>
+        </member>
+        <member name="M:Xuld.RazorEngine.TemplateBase`1.ResolveUrl(System.String)">
+            <summary>
+            将一个相对的路径地址改成基于网站虚拟路径的绝对地址。
+            </summary>
+            <param name="relativeUrl"></param>
+            <returns></returns>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateBase`1.CurrentContext">
+            <summary>
+            获取或设置当前的运行上下文。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateBase`1.Model">
+            <summary>
+            获取或设置当前的模型对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateBase`1.ViewBag">
+            <summary>
+            获取当前的自定义存储对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateBase`1.Output">
+            <summary>获取页面当前的 <see cref="T:System.IO.TextWriter" /> 对象。</summary>
+            <returns>
+            <see cref="T:System.IO.TextWriter" /> 对象。</returns>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateBase`1.Html">
+            <summary>获取与页关联的 <see cref="T:System.Web.WebPages.Html.HtmlHelper" /> 对象。</summary>
+            <returns>可以在页面中呈现 HTML 窗体控件的对象。</returns>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateBase`1.VirtualPath">
+            <summary>获取页的虚拟路径。</summary>
+            <returns>虚拟路径。</returns>
+        </member>
+        <member name="T:Xuld.RazorEngine.SectionWriter">
+            <summary>提供了用于表示写入内容部分时调用的一个或多个方法的委托。</summary>
+        </member>
+        <member name="M:Xuld.RazorEngine.DynamicTemplateBase.RazorDynamicObject.TryGetMember(System.Dynamic.GetMemberBinder,System.Object@)">
+            <summary>
+            Gets the value of the specified member.
+            </summary>
+            <param name="binder">The current binder.</param>
+            <param name="result">The member result.</param>
+            <returns>True.</returns>
+        </member>
+        <member name="T:Xuld.RazorEngine.TemplateContext">
+            <summary>
+            表示模板在执行时使用的上下文对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateContext.InputReader">
+            <summary>
+            获取或设置用于获取模板内容的 <see cref="T:System.IO.TextReader"/> 对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateContext.SourceFileName">
+            <summary>
+            模板的文件名或模板的别名，用于在模板互相引用时使用。模板的名字作为模板的唯一标识符，应该保证其唯一性。默认为模板文件的路径或模板字符串本身的哈希值。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateContext.AppPhysicalPath">
+            <summary>
+            获取或设置项目跟地址（~）代表的实际物理位置。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateContext.AppVirtualPath">
+            <summary>
+            获取或设置解析文件路径时使用的虚拟文件夹地址。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateContext.OutputWriter">
+            <summary>
+            获取或设置输出的 TextWriter 对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateContext.Model">
+            <summary>
+            获取或设置解析时使用的模型对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateContext.ViewBag">
+            <summary>
+            获取或设置解析使用的临时变量。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateContext.Razor">
+            <summary>
+            获取或设置被引用的 Razor 对象。
+            </summary>
+        </member>
+        <member name="P:Xuld.RazorEngine.TemplateContext.DefaultEncoding">
+            <summary>
+            获取或设置默认编码对象。
+            </summary>
+        </member>
+        <member name="T:Xuld.RazorEngine.TypeHelper">
+            <summary>
+            提供类型处理相关的辅助函数。
+            </summary>
+        </member>
+        <member name="M:Xuld.RazorEngine.TypeHelper.IsAnonymousType(System.Type)">
+            <summary>
+            Determines if the specified type is an anonymous type.
+            </summary>
+            <param name="type">The type to check.</param>
+            <returns>True if the type is an anonymous type, otherwise false.</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.TypeHelper.IsDynamicType(System.Type)">
+            <summary>
+            Determines if the specified type is a dynamic type.
+            </summary>
+            <param name="type">The type to check.</param>
+            <returns>True if the type is an anonymous type, otherwise false.</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.TypeHelper.IsIteratorType(System.Type)">
+            <summary>
+            Determines if the specified type is a compiler generated iterator type.
+            </summary>
+            <param name="type">The type to check.</param>
+            <returns>True if the type is an iterator type, otherwise false.</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.TypeHelper.GetTypeName(System.Type)">
+            <summary>
+            获取指定类型的名字。
+            </summary>
+            <param name="type">类型对象。</param>
+            <returns>返回类型名字。</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.TypeHelper.GetFirstGenericInterface(System.Type)">
+            <summary>
+            Gets the first generic interface of the specified type if one exists.
+            </summary>
+            <param name="type">The target type.</param>
+            <returns>The first generic interface if one exists, otherwise the first interface or the target type itself if there are no interfaces.</returns>
+        </member>
+        <member name="M:Xuld.RazorEngine.TypeHelper.CreateInstance(System.Type)">
+            <summary>
+            使用指定类型的默认构造函数来创建该类型的实例。
+            </summary>
+            <param name="type">要创建的对象的类型。</param>
+            <returns>对新创建对象的引用。</returns>
+        </member>
+        <member name="T:Xuld.RazorEngine.UrlUtil">
+            <summary>
+            提供 URL 解析的函数。
+            </summary>
+        </member>
+        <member name="M:Xuld.RazorEngine.UrlUtil.Relative(System.String,System.String,System.Char)">
+            <summary>
+            获取后者相对前者的相对路径。
+            </summary>
+            <param name="fromPath">主目录</param>
+            <param name="toPath">文件的绝对路径</param>
+            <returns>toPath相对于fromPath的路径。</returns>
+            <example>
+            GetRelativePath(@"D:\Windows\Web\Wallpaper\aa.css", @"D:\Windows\regedit.exe" ) = @"..\..\regedit.exe" = ;
+            </example>
+        </member>
+    </members>
+</doc>
