@@ -1,8 +1,8 @@
 Xuld.RazorEngine
 ===========
 
-A templating engine built on Microsoft's Razor parsing engine, 
-RazorEngine allows you to use Razor syntax to build dynamic templates:
+A templating engine built on Microsoft's Razor parsing engine written in C#, 
+Xuld.RazorEngine allows you to use Razor syntax to build dynamic templates:
 
 	string template = "Hello @Model.Name, welcome to RazorEngine!";
 	string result = Razor.Parse(template, new { Name = "World" });
@@ -14,4 +14,4 @@ Xuld.RazorEngine is much smaller and more efficient then
 In spite of this, Xuld.RazorEngine meets well for all requirements of templating.
 
 
-For more information, please visit our [wiki](https://github.com/xuld/RazorEngine/wiki)
+[For more information, please visit our wiki](https://github.com/xuld/RazorEngine/wiki)
